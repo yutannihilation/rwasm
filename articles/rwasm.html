@@ -123,17 +123,17 @@ that “Use Rosetta for x86/amd64 emulation on Apple Silicon” is disabled
 in the Docker Desktop settings.&lt;/p&gt;"><sup>1</sup></a>. Then, in a terminal, pull the latest
 version of the <a href="https://github.com/r-wasm/webr/pkgs/container/webr" class="external-link">webR
 development container</a>:</p>
-<pre class="console"><code>$ docker pull ghcr.io/r-wasm/webr:v0.2.1</code></pre>
+<pre class="console"><code>docker pull ghcr.io/r-wasm/webr:main</code></pre>
 <p>Next, create a new directory named <code>output</code> to store the
 built R packages,</p>
-<pre class="console"><code>$ mkdir -p output</code></pre>
+<pre class="console"><code>mkdir -p output</code></pre>
 <p>Then start R in the Docker container, mounting the new
 <code>output</code> directory into place and setting it as the working
 directory<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;If you see an error along the lines of
 &lt;code&gt;The path [...]/output is not shared from the host and is not known to Docker&lt;/code&gt;,
 follow the instructions given in the rest of the error output to ensure
 that the &lt;code&gt;output&lt;/code&gt; directory is shared with Docker.&lt;/p&gt;"><sup>2</sup></a>:</p>
-<pre class="console"><code>$ docker run -it --rm -v $(PWD)/output:/root -w /output ghcr.io/r-wasm/webr:v0.2.1 R</code></pre>
+<pre class="console"><code>docker run -it --rm -v $(PWD)/output:/output -w /output ghcr.io/r-wasm/webr:main R</code></pre>
 <p>You may now continue by working in this R session. The Docker
 container will provide the required development environment and tools
 for building binary R packages for Wasm. R packages and repositories
@@ -184,8 +184,8 @@ your native system.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-wasm.github.io/rwasm/">rwasm</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Targeting Wasm packages for R 4.3.0</span></span>
-<span><span class="co">#&gt; With `WEBR_ROOT` directory: /home/username/webr</span></span>
-<span><span class="co">#&gt; With `EMSCRIPTEN_ROOT` directory: /home/username/emsdk/upstream/emscripten</span></span></code></pre></div>
+<span><span class="co">#&gt; With `WEBR_ROOT` directory: /opt/webr</span></span>
+<span><span class="co">#&gt; With `EMSCRIPTEN_ROOT` directory: /opt/emsdk/upstream/emscripten</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="adding-an-r-package-to-the-repository">Adding an R package to the repository<a class="anchor" aria-label="anchor" href="#adding-an-r-package-to-the-repository"></a>
@@ -212,14 +212,19 @@ R packages.</p>
 <div class="section level3">
 <h3 id="local-testing">Local testing<a class="anchor" aria-label="anchor" href="#local-testing"></a>
 </h3>
-<p>The following R command starts a local web server to serve your
+<p>The R command given below starts a local web server to serve your
 package repository for testing<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;Ensure that the latest version of the
 &lt;code&gt;httpuv&lt;/code&gt; package is installed so that the
-&lt;code&gt;?httpuv::runStaticServer&lt;/code&gt; function is available.&lt;/p&gt;"><sup>4</sup></a>. When serving your repository locally, be
-sure to include the <code>Access-Control-Allow-Origin: *</code> HTTP
-header, required for loading R packages from a cross-origin server by
-the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" class="external-link">CORS</a>
+&lt;code&gt;?httpuv::runStaticServer&lt;/code&gt; function is available.&lt;/p&gt;"><sup>4</sup></a>. The
+<code>Access-Control-Allow-Origin: *</code> HTTP header is included,
+required for loading R packages from a cross-origin server through the
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" class="external-link">CORS</a>
 mechanism.</p>
+<p>If you are using a Docker container to build Wasm R packages, be sure
+to run the following command in a new R session outside Docker so that
+the web server is accessible to the host machine. You might also want to
+set <code>dir = "./output"</code> to serve the contents of the
+<code>output</code> directory mounted in the Docker container.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">httpuv</span><span class="fu">::</span><span class="fu">runStaticServer</span><span class="op">(</span></span>
 <span>  dir <span class="op">=</span> <span class="st">"."</span>,</span>
@@ -246,18 +251,18 @@ sufficient, it should be deployed to the web via a static file hosting
 service of your choice. In this example we will use GitHub Pages.</p>
 <p>First, create a new directory for your GitHub repository and copy
 your webR binary repo into place.</p>
-<pre><code>$ mkdir -p my-wasm-repo
-$ cp -r ./path/to/output/repo my-wasm-repo/repo
-$ cd my-wasm-repo</code></pre>
+<pre><code>mkdir -p my-wasm-repo
+cp -r ./path/to/output/repo my-wasm-repo/repo
+cd my-wasm-repo</code></pre>
 <p>Next, initialise a new GitHub repository to host your binary R
 packages, and run the commands given by GitHub to initialise and push an
 initial commit of your Wasm binary packages.</p>
-<pre><code>$ git init
-$ git add repo
-$ git commit -m "First commit"
-$ git branch -M main
-$ git remote add origin https://github.com/username/my-wasm-repo.git
-$ git push -u origin main</code></pre>
+<pre><code>git init
+git add repo
+git commit -m "First commit"
+git branch -M main
+git remote add origin https://github.com/username/my-wasm-repo.git
+git push -u origin main</code></pre>
 <p>Now, in your web browser, refresh your GitHub project and click
 <strong>Settings</strong>. If you cannot see the “Settings” tab, click
 the dropdown menu, then click <strong>Settings</strong>.</p>
