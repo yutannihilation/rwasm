@@ -105,12 +105,11 @@ related R packages, in the VFS accessible to webR.</p>
 <div class="section level2">
 <h2 id="building-an-r-package-library">Building an R package library<a class="anchor" aria-label="anchor" href="#building-an-r-package-library"></a>
 </h2>
-<p>Similarly to the <code>vignette("getting-started")</code> article, to
-build an R package library image we must first build one or more Wasm R
-packages using <code><a href="../reference/add_pkg.html">add_pkg()</a></code>. As an example, let’s build a
-package with a few hard dependencies. Ensure that you are running R in
+<p>To build an R package library image we must first build one or more
+Wasm R packages using <code><a href="../reference/add_pkg.html">add_pkg()</a></code>. As an example, let’s build
+a package with a few hard dependencies. Ensure that you are running R in
 an environment with access to Wasm development tools<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;See the “Setting up the WebAssembly toolchain” section
-in &lt;code&gt;vignette("getting-started")&lt;/code&gt; for further details.&lt;/p&gt;'><sup>1</sup></a>, then run:</p>
+in &lt;code&gt;&lt;a href="../articles/rwasm.html"&gt;vignette("rwasm")&lt;/a&gt;&lt;/code&gt; for further details.&lt;/p&gt;'><sup>1</sup></a>, then run:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rwasm</span><span class="fu">::</span><span class="fu"><a href="../reference/add_pkg.html">add_pkg</a></span><span class="op">(</span><span class="st">"dplyr"</span><span class="op">)</span></span></code></pre></div>
 <p>After the build process has completed, the new <code>repo</code>
@@ -187,9 +186,9 @@ so that R packages may be loaded from the new library.</p>
 <p>The filesystem image files should be deployed to the static file
 hosting service of your choice, so that they are available for download
 anywhere. See the “Deployment to static hosting” section in
-<code>vignette("getting-started")</code> for an example of how to host
-static files with GitHub pages, substituting the <code>repo</code>
-directory for the <code>vfs</code> directory in the example.</p>
+<code><a href="../articles/rwasm.html">vignette("rwasm")</a></code> for an example of how to host static
+files with GitHub pages, substituting the <code>repo</code> directory
+for the <code>vfs</code> directory in the example.</p>
 </div>
 <div class="section level3">
 <h3 id="packaging-other-data">Packaging other data<a class="anchor" aria-label="anchor" href="#packaging-other-data"></a>
