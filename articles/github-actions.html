@@ -174,10 +174,10 @@ documentation</a>.</p>
 <h2 id="using-an-r-package-library-image">Using an R package library image<a class="anchor" aria-label="anchor" href="#using-an-r-package-library-image"></a>
 </h2>
 <p>An Emscripten filesystem image containing an R package library may
-also be built and uploaded to GitHub pages. If you’d prefer to mount a
-package library image, rather than install R packages from a CRAN-like
-repo, upload the <code>wasm-image</code> artifact to your GitHub Pages
-site:</p>
+also be built and uploaded to GitHub Pages. If you’d prefer to mount an
+R package library, rather than install packages from a CRAN-like repo,
+use the <code>image-path</code> parameter to prepare the Emscripten
+filesystem image for upload to your GitHub Pages site:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Download wasm artifacts</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-wasm/actions/download-wasm-artifacts@v1</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">with</span><span class="kw">:</span></span>
