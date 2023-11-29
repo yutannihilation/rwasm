@@ -192,12 +192,12 @@ your native system.</p>
 <h2 id="building-an-r-package">Building an R package<a class="anchor" aria-label="anchor" href="#building-an-r-package"></a>
 </h2>
 <p>R package binaries can be built for WebAssembly using the
-<code>build()</code> function. The resulting Wasm R package binary and
+<code><a href="../reference/build.html">build()</a></code> function. The resulting Wasm R package binary and
 an Emscripten filesystem image containing the R package are written to
 the directory given by the <code>out_dir</code> argument, defaulting to
 the current working directory.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">build</span><span class="op">(</span><span class="st">"cli"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/build.html">build</a></span><span class="op">(</span><span class="st">"cli"</span><span class="op">)</span></span></code></pre></div>
 <p>Wasm R package binaries must be made available to the webR filesystem
 in some way before they can be used. Read on for more details on how to
 build an R package library for static web hosting of Wasm R packages.
