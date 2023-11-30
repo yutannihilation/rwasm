@@ -79,8 +79,9 @@ resulting WebAssembly binary packages are written to <code>out_dir</code>.</p>
 
 <dt>remotes</dt>
 <dd><p>A character vector of package references to prefer as a remote
-source. If <code>NULL</code>, use a built-in list of references to packages
-pre-modified for use with webR.</p></dd>
+source. If <code>NA</code>, use a built-in list of references to packages pre-modified
+for use with webR. Defaults to <code>NULL</code>, meaning no preference over the usual
+remote sources.</p></dd>
 
 
 <dt>out_dir</dt>
