@@ -105,7 +105,7 @@ for use with webR, and enables continuous integration.</p>
 <h2 id="setting-up-the-github-repository">Setting up the GitHub repository<a class="anchor" aria-label="anchor" href="#setting-up-the-github-repository"></a>
 </h2>
 <p>First, create a new GitHub repository <a href="https://docs.github.com/en/get-started/quickstart/create-a-repo#" class="external-link">following
-GitHub’s instructions</a> to intialise a new empty git repo.</p>
+GitHub’s instructions</a> to initialise a new empty git repo.</p>
 <p>Create a file named <code>packages</code>, containing a list of <a href="https://r-lib.github.io/pkgdepends/reference/pkg_refs.html" class="external-link">R
 package references</a>. Add one R package per line, and custom R
 packages hosted on GitHub may also be included here. For example:</p>
@@ -161,9 +161,8 @@ webR should be able to install your package from a GitHub Pages URL:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">webr</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="st">"cli"</span>, repos <span class="op">=</span> <span class="st">"http://username.github.io/my-wasm-repo/"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Downloading webR package: cli</span></span></code></pre></div>
-<p>Further usage details for
-<code>r-wasm/actions/build-wasm-packages</code> can be found in the <a href="https://github.com/r-wasm/actions/tree/v1/build-wasm-packages" class="external-link">GitHub
-documentation</a>.</p>
+<p>Further usage details can be found in the <a href="https://github.com/r-wasm/actions/tree/v1/.github/workflows/README.md" class="external-link">r-wasm/actions
+GitHub documentation</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="using-an-r-package-library-image">Using an R package library image<a class="anchor" aria-label="anchor" href="#using-an-r-package-library-image"></a>
